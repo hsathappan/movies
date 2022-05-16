@@ -1,6 +1,7 @@
 **Movie Database**
 
 **E-R Model**
+
 The 3 main entities are:
 - Movie
 - Company
@@ -21,17 +22,21 @@ I am storing the company details per year which includes the budget and revenue 
 **Assumptions**
 1. The company budget and revenue are attributed in full to each company per movie even if there are multiple companies involved in the production of the movie, since we don't have visibility into how the budget and revenue is split between them.
 2. The popularity is attributed in full to each of the genres if there are multiple genres per movie.
+3. If the movie date is blank then I am not processing that movie, since that will not help answer any queries.
 
 
 **Architecture & App Set Up**
+
 The architecture is an MVC spring-boot java application connecting to a PostgreSQL DB. I am using Slf4j and Logback for logging and OpenAPI for API documentation (Swagger-UI).
 
 I am using docker to orchestrate the system. You can run the app by typing the commands below:
-
+```
 docker compose build
 docker compose up
+```
 
 Once the app is started, the data is loaded from the movies_metadata.csv file and populated into the tables. The current batch size is hardcoded to 25,000, but it can be made configurable. That is, for every 25k movies read from the file, the data is flushed to the DB. Also, where the data is being read can be made configurable.
+I create a data pipeline, while the data is being read from the csv file to store the summarized versions of the data in the 2 reporting tables that will be accessed by the APIs. This gives us very fast response times on our API requests. 
 
 **API**
 
