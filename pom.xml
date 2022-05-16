@@ -12,7 +12,7 @@
 	<artifactId>guild</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>guild</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Guild project for MovieDB</description>
 	<properties>
 		<java.version>18</java.version>
 	</properties>
